@@ -1,0 +1,18 @@
+apiVersion: v1
+
+kind: Service
+
+metadata:
+  name: pp-app-ws-gateway
+  namespace: default
+  labels:
+    app: pp-app-ws-gateway
+
+spec:
+  selector:
+    app: pp-app-ws-gateway
+
+  ports:
+  - name: http
+    port: 8000
+    targetPort: 8000

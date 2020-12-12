@@ -1,0 +1,28 @@
+DB_URIS:
+    "service_ws_gateway:Base": postgresql://${POSTGRES_DB_USERNAME:dev_user}:${POSTGRES_DB_PASSWORD:0000}@${POSTGRES_DB_HOST:postgres}:${POSTGRES_DB_PORT:5432}/${POSTGRES_DB_NAME:tg}
+
+AMQP_URI: amqp://${RABBITMQ_USERNAME:dev_user}:${RABBITMQ_PASSWORD:0000}@${RABBITMQ_HOST:localhost}:${RABBITMQ_PORT:5672}/${RABBITMQ_VIRTUAL_HOST:tgvhost}
+
+WEB_SERVER_ADDRESS: 0.0.0.0:${PORT:8000}
+
+DOMAIN: ${DOMAIN:tgdev.me}
+HTTPS: ${HTTPS_ENABLED:false}
+
+LOGGING:
+  version: 1
+  handlers:
+    none:
+      class: logging.NullHandler
+    console:
+      class: logging.StreamHandler
+      formatter: jsonFormatter
+  loggers:
+    '': # root
+      level: INFO
+      handlers: [console]
+      propagate: False
+  formatters:
+    jsonFormatter:
+      class: pythonjsonlogger.jsonlogger.JsonFormatter
+      format: '%(name)s %(asctime)s %(levelname)s %(message)s'
+      datefmt: '%d/%m/%Y %H:%M:%S'

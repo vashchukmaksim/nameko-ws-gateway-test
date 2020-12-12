@@ -1,0 +1,12 @@
+psycopg2==2.8.4
+alembic==1.0.11
+pyopenssl==19.1.0
+nameko==2.12.0
+nameko-sentry==1.0.0
+nameko-sqlalchemy==1.5.0
+nameko-amqp-retry==0.7.1
+fluent-logger===0.9.6
+python-json-logger==0.1.11
+SQLAlchemy==1.3.6
+SQLAlchemy-Utils==0.34.1
+werkzeug==0.15.6

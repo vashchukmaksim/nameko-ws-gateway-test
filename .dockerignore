@@ -1,0 +1,14 @@
+Dockerfile
+.dockerignore
+.gitignore
+
+*.pyc
+**/*/__pycache__/
+README.md
+alembic.ini
+
+.github/
+alembic/
+docs/
+k8s/
+scripts/

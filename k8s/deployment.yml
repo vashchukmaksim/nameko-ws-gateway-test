@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: pp-app-ws-gateway
+  namespace: default
+  labels:
+    app: pp-app-ws-gateway
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: pp-app-ws-gateway
+
+  template:
+    metadata:
+      labels:
+        app: pp-app-ws-gateway
+
+    spec:
+
+      # Docker Hub credentials
+      imagePullSecrets:
+        - name: regcred
+
+      containers:
+
+        # Container
+        - name: pp-app-ws-gateway
+          image: nexus.prostpost.me:18080/app_ws_gateway_test:latest-06
+          ports:
+          - containerPort: 8000
+
+          # Probes
+          livenessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            httpGet:
+                path: /healthz
+                port: 8000
+
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            httpGet:
+                path: /readyz
+                port: 8000
+
+          # Limits
+          resources:
+            limits:
+              cpu: 200m
+              memory: 80M
